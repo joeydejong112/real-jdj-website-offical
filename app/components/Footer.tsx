@@ -2,6 +2,7 @@
 
 import { Mail, MessageCircle } from "lucide-react";
 import { EMAIL, navItems, WHATSAPP_DEFAULT } from "../lib/content";
+import { scrollToAnchor } from "../lib/scroll";
 import { MaskWords } from "./motion-primitives";
 
 const CURRENT_YEAR = 2026;
@@ -29,6 +30,7 @@ export function Footer() {
               <a
                 key={item.href}
                 href={item.href}
+                onClick={scrollToAnchor}
                 className="inline-flex min-h-11 min-w-11 w-fit items-center text-white/75 transition-colors hover:text-teal lg:min-h-0 lg:min-w-0"
               >
                 {item.label}

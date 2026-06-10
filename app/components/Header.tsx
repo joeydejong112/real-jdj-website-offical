@@ -1,5 +1,6 @@
 "use client";
 
+import type { MouseEvent } from "react";
 import { useState } from "react";
 import {
   AnimatePresence,
@@ -10,6 +11,7 @@ import {
 } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { navItems } from "../lib/content";
+import { scrollToAnchor, useStripUrlHash } from "../lib/scroll";
 import { EASE_OUT_EXPO, WhatsAppButton, useMotionTiming } from "./motion-primitives";
 
 const HIDE_AFTER_PX = 160;
@@ -21,6 +23,8 @@ export function Header() {
   const timing = useMotionTiming();
   const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 22, restDelta: 0.001 });
 
+  useStripUrlHash();
+
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
     setIsHidden(latest > previous && latest > HIDE_AFTER_PX && !isMenuOpen);
@@ -28,6 +32,11 @@ export function Header() {
 
   function closeMenu() {
     setIsMenuOpen(false);
+  }
+
+  function handleAnchorClick(event: MouseEvent<HTMLAnchorElement>) {
+    scrollToAnchor(event);
+    closeMenu();
   }
 
   return (
@@ -43,7 +52,7 @@ export function Header() {
       />
 
       <div className="shell flex h-[76px] items-center justify-between gap-6">
-        <a href="/#top" className="flex min-h-11 flex-col justify-center leading-none" onClick={closeMenu}>
+        <a href="/#top" className="flex min-h-11 flex-col justify-center leading-none" onClick={handleAnchorClick}>
           <span className="font-display block text-[28px] font-extrabold leading-none tracking-tight text-navy">
             JDJ<span className="text-teal">.</span>
           </span>
@@ -57,6 +66,7 @@ export function Header() {
             <a
               key={item.href}
               href={item.href}
+              onClick={scrollToAnchor}
               className="group relative py-2 transition-colors hover:text-teal-deep"
             >
               {item.label}
@@ -95,7 +105,7 @@ export function Header() {
                 <motion.a
                   key={item.href}
                   href={item.href}
-                  onClick={closeMenu}
+                  onClick={handleAnchorClick}
                   className="rounded-xl px-4 py-3 text-lg font-semibold text-navy hover:bg-mist"
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}

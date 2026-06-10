@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { Check } from "lucide-react";
 import { packages, whatsappUrl } from "../lib/content";
 import type { Package } from "../lib/content";
+import { scrollToAnchor } from "../lib/scroll";
 import { Reveal, SectionHeading, useMotionTiming } from "./motion-primitives";
 
 export function Pricing() {
@@ -35,6 +36,7 @@ export function Pricing() {
             Maandbedrag dekt hosting, SSL, updates en fair-use wijzigingen ·{" "}
             <a
               href="#faq"
+              onClick={scrollToAnchor}
               className="inline-flex min-h-11 min-w-11 items-center font-bold text-teal-deep underline underline-offset-4 hover:text-navy lg:min-h-0 lg:min-w-0"
             >
               zie veelgestelde vragen
