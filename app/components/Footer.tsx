@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, MapPin, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 import { EMAIL, navItems, WHATSAPP_DEFAULT } from "../lib/content";
 import { MaskWords } from "./motion-primitives";
 
@@ -54,19 +54,16 @@ export function Footer() {
               <Mail className="h-4 w-4 shrink-0 text-teal" />
               <span className="break-all">{EMAIL}</span>
             </a>
-            <span className="inline-flex items-center gap-2.5 text-white/75">
-              <MapPin className="h-4 w-4 text-teal" /> Utrecht + 30 km
-            </span>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-4 py-7 text-[13px] text-white/45">
           <span>© {CURRENT_YEAR} JDJ Webdevelopment. Alle rechten voorbehouden.</span>
           <span className="flex flex-wrap gap-x-6 gap-y-2">
-            <a href="#" className="inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-white lg:min-h-0 lg:min-w-0">
+            <a href="/privacy" className="inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-white lg:min-h-0 lg:min-w-0">
               Privacyverklaring
             </a>
-            <a href="#" className="inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-white lg:min-h-0 lg:min-w-0">
+            <a href="/voorwaarden" className="inline-flex min-h-11 min-w-11 items-center transition-colors hover:text-white lg:min-h-0 lg:min-w-0">
               Algemene voorwaarden
             </a>
           </span>

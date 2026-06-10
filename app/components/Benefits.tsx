@@ -16,7 +16,7 @@ import {
   Zap,
 } from "lucide-react";
 import { stats } from "../lib/content";
-import { Counter, EASE_OUT_EXPO, Reveal, SectionHeading } from "./motion-primitives";
+import { Counter, EASE_OUT_EXPO, Reveal, SectionHeading, useMotionTiming } from "./motion-primitives";
 
 const techChips = [
   { icon: Zap, label: "Snelle laadtijd" },
@@ -49,10 +49,14 @@ export function Benefits() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-12">
+        <div className="relative mt-14 grid grid-cols-1 gap-0 pl-[62px] before:absolute before:left-[26px] before:top-3 before:bottom-10 before:w-px before:bg-gradient-to-b before:from-teal/55 before:via-line before:to-transparent lg:grid-cols-12 lg:gap-5 lg:pl-0 lg:before:hidden">
           <BentoCard span="lg:col-span-7" delay={0}>
-            <CardHeader icon={Bolt} number="01" />
-            <h3 className="font-display mt-6 text-[24px] font-bold text-navy">Snel online</h3>
+            <div className="flex items-center gap-3 lg:block">
+              <CardHeader icon={Bolt} number="01" />
+              <h3 className="font-display min-w-0 text-[24px] font-bold leading-tight text-navy lg:mt-6">
+                Snel online
+              </h3>
+            </div>
             <p className="mt-3 max-w-[52ch] text-[15px] leading-7 text-muted">
               Geen maandenlange trajecten. Vandaag akkoord betekent deze week nog de eerste
               stap. Binnen twee weken sta je live.
@@ -61,11 +65,13 @@ export function Benefits() {
           </BentoCard>
 
           <BentoCard span="lg:col-span-5" surface="bg-navy" delay={0.1}>
-            <CardHeader icon={HeartHandshake} number="02" dark />
-            <h3 className="font-display mt-6 text-[24px] font-bold text-white">
-              Persoonlijk contact
-            </h3>
-            <p className="mt-3 text-[15px] leading-7 text-white/65">
+            <div className="flex items-center gap-3 lg:block">
+              <CardHeader icon={HeartHandshake} number="02" dark />
+              <h3 className="font-display min-w-0 text-[24px] font-bold leading-tight text-navy lg:mt-6 lg:text-white">
+                Persoonlijk contact
+              </h3>
+            </div>
+            <p className="mt-3 text-[15px] leading-7 text-muted lg:text-white/65">
               Je appt met mij via WhatsApp. Ik antwoord binnen 24 uur en pak je vraag
               zelf op.
             </p>
@@ -73,10 +79,12 @@ export function Benefits() {
           </BentoCard>
 
           <BentoCard span="lg:col-span-5" delay={0.15}>
-            <CardHeader icon={ShieldCheck} number="03" />
-            <h3 className="font-display mt-6 text-[24px] font-bold text-navy">
-              Technisch netjes
-            </h3>
+            <div className="flex items-center gap-3 lg:block">
+              <CardHeader icon={ShieldCheck} number="03" />
+              <h3 className="font-display min-w-0 text-[24px] font-bold leading-tight text-navy lg:mt-6">
+                Technisch netjes
+              </h3>
+            </div>
             <p className="mt-3 text-[15px] leading-7 text-muted">
               Ik bouw de site op een nette technische basis, zodat hosting en onderhoud
               beheersbaar blijven.
@@ -95,10 +103,18 @@ export function Benefits() {
           </BentoCard>
 
           <BentoCard span="lg:col-span-7" surface="bg-teal-soft" delay={0.2}>
-            <CardHeader icon={Search} number="04" />
-            <div className="grid items-center gap-7 sm:grid-cols-[1fr_1.1fr]">
+            <div className="flex items-center gap-3 lg:hidden">
+              <CardHeader icon={Search} number="04" />
+              <h3 className="font-display min-w-0 text-[24px] font-bold leading-tight text-navy">
+                Titels en lokale zoektermen
+              </h3>
+            </div>
+            <div className="hidden lg:block">
+              <CardHeader icon={Search} number="04" />
+            </div>
+            <div className="grid items-center gap-7 lg:grid-cols-[1fr_1.1fr]">
               <div>
-                <h3 className="font-display mt-6 text-[24px] font-bold text-navy sm:mt-0">
+                <h3 className="hidden font-display text-[24px] font-bold text-navy lg:block">
                   Titels en lokale zoektermen
                 </h3>
                 <p className="mt-3 text-[15px] leading-7 text-teal-deep/90">
@@ -112,11 +128,16 @@ export function Benefits() {
         </div>
 
         <Reveal delay={0.15} className="mt-16">
-          <dl className="grid gap-y-10 rounded-2xl border border-line bg-white px-8 py-10 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-line lg:gap-y-0">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center lg:px-6">
+          <dl className="grid grid-cols-2 overflow-hidden rounded-2xl border border-line bg-white lg:grid-cols-4 lg:divide-x lg:divide-line lg:px-8 lg:py-10">
+            {stats.map((stat, index) => (
+              <div
+                key={stat.label}
+                className={`min-w-0 px-3 py-5 text-center sm:px-5 sm:py-7 lg:px-6 lg:py-0 ${
+                  index % 2 === 0 ? "border-r border-line/70 lg:border-r-0" : ""
+                } ${index < 2 ? "border-b border-line/70 lg:border-b-0" : ""}`}
+              >
                 <dt className="sr-only">{stat.label}</dt>
-                <dd className="font-display text-[clamp(36px,3.4vw,48px)] font-extrabold leading-none tracking-tight text-navy">
+                <dd className="font-display whitespace-nowrap text-[clamp(27px,7vw,34px)] font-extrabold leading-none tracking-tight text-navy sm:text-[clamp(36px,3.4vw,48px)]">
                   {stat.value === null ? (
                     <span>
                       {stat.display}
@@ -126,7 +147,9 @@ export function Benefits() {
                     <Counter to={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
                   )}
                 </dd>
-                <dd className="mt-2.5 text-[14px] font-semibold text-muted">{stat.label}</dd>
+                <dd className="mx-auto mt-2 max-w-[15ch] text-[12px] font-semibold leading-snug text-muted sm:text-[14px] lg:mt-2.5 lg:max-w-none lg:leading-normal">
+                  {stat.label}
+                </dd>
               </div>
             ))}
           </dl>
@@ -144,12 +167,24 @@ interface BentoCardProps {
 }
 
 function BentoCard({ children, span, surface = "bg-white", delay = 0 }: BentoCardProps) {
+  const timing = useMotionTiming();
+  const desktopSurface =
+    surface === "bg-navy"
+      ? "lg:bg-navy"
+      : surface === "bg-teal-soft"
+        ? "lg:bg-teal-soft"
+        : "lg:bg-white";
+
   return (
     <Reveal delay={delay} className={`h-full min-w-0 ${span}`}>
       <motion.article
-        whileHover={{ y: -6 }}
-        transition={{ type: "spring", stiffness: 300, damping: 24 }}
-        className={`h-full overflow-hidden rounded-3xl p-8 shadow-[0_2px_10px_rgba(7,23,47,0.05)] transition-shadow duration-300 hover:shadow-[0_28px_56px_-24px_rgba(7,23,47,0.25)] ${surface}`}
+        whileHover={timing.isMobile ? undefined : { y: -6 }}
+        transition={
+          timing.isMobile
+            ? { type: "spring", stiffness: 440, damping: 28 }
+            : { type: "spring", stiffness: 300, damping: 24 }
+        }
+        className={`relative h-full overflow-visible bg-transparent pb-11 pt-1 transition-shadow duration-300 lg:overflow-hidden lg:rounded-3xl lg:p-8 lg:shadow-[0_2px_10px_rgba(7,23,47,0.05)] lg:hover:shadow-[0_28px_56px_-24px_rgba(7,23,47,0.25)] ${desktopSurface}`}
       >
         {children}
       </motion.article>
@@ -159,15 +194,19 @@ function BentoCard({ children, span, surface = "bg-white", delay = 0 }: BentoCar
 
 function CardHeader({ icon: Icon, number, dark = false }: { icon: LucideIcon; number: string; dark?: boolean }) {
   return (
-    <div className="flex items-start justify-between">
+    <div className="relative flex shrink-0 items-start justify-between">
       <span
-        className={`grid h-12 w-12 place-items-center rounded-xl ${
-          dark ? "bg-teal/20 text-teal" : "bg-teal-soft text-teal-deep"
+        className={`absolute -left-[58px] top-0 z-10 grid h-11 w-11 place-items-center rounded-full border border-teal/20 bg-paper text-teal-deep shadow-[0_12px_28px_-18px_rgba(7,23,47,0.45)] lg:static lg:h-12 lg:w-12 lg:rounded-xl lg:border-0 lg:shadow-none ${
+          dark ? "lg:bg-teal/20 lg:text-teal" : "lg:bg-teal-soft lg:text-teal-deep"
         }`}
       >
-        <Icon className="h-6 w-6" strokeWidth={2.2} />
+        <Icon className="h-5 w-5 lg:h-6 lg:w-6" strokeWidth={2.2} />
       </span>
-      <span className={`font-display text-[15px] font-bold ${dark ? "text-white/25" : "text-navy/20"}`}>
+      <span
+        className={`font-display inline-flex h-7 shrink-0 items-center rounded-full border border-line bg-white px-2.5 text-[12px] font-bold text-navy/45 shadow-[0_10px_24px_-20px_rgba(7,23,47,0.35)] lg:block lg:h-auto lg:rounded-none lg:border-0 lg:bg-transparent lg:px-0 lg:text-[15px] lg:shadow-none ${
+          dark ? "lg:text-white/25" : "lg:text-navy/20"
+        }`}
+      >
         {number}
       </span>
     </div>
@@ -177,6 +216,7 @@ function CardHeader({ icon: Icon, number, dark = false }: { icon: LucideIcon; nu
 /** Akkoord → 48u → live, with a dashed line that draws itself in view. */
 function DeliveryTimeline() {
   const reduceMotion = useReducedMotion();
+  const timing = useMotionTiming();
 
   return (
     <div className="mt-8 flex items-start gap-2 sm:gap-3">
@@ -187,7 +227,11 @@ function DeliveryTimeline() {
             initial={reduceMotion ? false : { opacity: 0, scale: 0.7 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.2 + index * 0.25 }}
+            transition={
+              timing.isMobile
+                ? { type: "spring", stiffness: 420, damping: 24, delay: 0.08 + index * 0.08 }
+                : { type: "spring", stiffness: 260, damping: 18, delay: 0.2 + index * 0.25 }
+            }
           >
             <span
               className={`grid h-12 w-12 place-items-center rounded-full ${
@@ -206,7 +250,11 @@ function DeliveryTimeline() {
               initial={reduceMotion ? false : { scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: 0.35 + index * 0.25, ease: EASE_OUT_EXPO }}
+              transition={{
+                duration: timing.duration(0.5, 0.24),
+                delay: timing.delay(0.35 + index * 0.25, 0.12 + index * 0.08),
+                ease: EASE_OUT_EXPO,
+              }}
               aria-hidden="true"
             />
           )}
@@ -219,15 +267,16 @@ function DeliveryTimeline() {
 /** WhatsApp row with a live typing indicator. */
 function ChatPreview() {
   const reduceMotion = useReducedMotion();
+  const timing = useMotionTiming();
 
   return (
-    <div className="mt-7 rounded-2xl border border-white/10 bg-white/[0.06] p-4">
+    <div className="mt-7 rounded-2xl border border-line bg-white p-4 lg:border-white/10 lg:bg-white/[0.06]">
       <div className="flex items-center gap-3">
         <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-wa text-white">
           <MessageCircle className="h-5 w-5" strokeWidth={2.4} />
         </span>
         <div className="min-w-0">
-          <strong className="block truncate text-[13.5px] font-bold text-white">
+          <strong className="block truncate text-[13.5px] font-bold text-navy lg:text-white">
             JDJ Webdevelopment
           </strong>
           <span className="text-[12px] font-medium text-teal">is aan het typen…</span>
@@ -238,7 +287,12 @@ function ChatPreview() {
               key={dot}
               className="h-1.5 w-1.5 rounded-full bg-teal"
               animate={reduceMotion ? undefined : { y: [0, -4, 0], opacity: [0.4, 1, 0.4] }}
-              transition={{ duration: 1, repeat: Infinity, delay: dot * 0.16, ease: "easeInOut" }}
+              transition={{
+                duration: timing.duration(1, 0.58),
+                repeat: Infinity,
+                delay: timing.delay(dot * 0.16, dot * 0.08),
+                ease: "easeInOut",
+              }}
             />
           ))}
         </span>
@@ -250,7 +304,7 @@ function ChatPreview() {
 /** Miniature search result: what "vindbaar" actually looks like. */
 function SearchResultPreview() {
   return (
-    <div className="rounded-2xl bg-white p-4 shadow-[0_14px_32px_-16px_rgba(7,23,47,0.25)] sm:mt-6" aria-hidden="true">
+    <div className="rounded-2xl bg-white p-4 shadow-[0_14px_32px_-16px_rgba(7,23,47,0.25)] lg:mt-6" aria-hidden="true">
       <div className="flex items-center gap-2.5 rounded-full border border-line px-4 py-2.5">
         <Search className="h-4 w-4 text-muted" strokeWidth={2.4} />
         <span className="text-[13px] font-medium text-ink">kapper utrecht</span>

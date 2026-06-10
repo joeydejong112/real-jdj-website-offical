@@ -6,10 +6,19 @@ import { Pricing } from "./components/Pricing";
 import { Faq } from "./components/Faq";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { businessJsonLd, faqJsonLd, jsonLdString } from "./lib/seo";
 
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdString(businessJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdString(faqJsonLd) }}
+      />
       <Header />
       <main id="main" className="min-h-screen bg-paper">
         <Hero />

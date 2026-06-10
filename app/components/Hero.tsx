@@ -8,7 +8,7 @@ import {
   useTransform,
 } from "motion/react";
 import { CheckCheck, CheckCircle2, Globe, MessageCircle, Undo2 } from "lucide-react";
-import { EASE_OUT_EXPO, MaskWords, WhatsAppButton } from "./motion-primitives";
+import { EASE_OUT_EXPO, MaskWords, WhatsAppButton, useMotionTiming } from "./motion-primitives";
 
 const heroPoints = [
   "Oplevering in 1–2 weken na ontvangst content",
@@ -19,6 +19,7 @@ const heroPoints = [
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  const timing = useMotionTiming();
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
@@ -40,18 +41,16 @@ export function Hero() {
 
       <div className="shell relative grid items-center gap-10 pb-16 pt-10 sm:gap-14 sm:pb-20 sm:pt-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-10 lg:pb-28 lg:pt-20">
         <motion.div className="min-w-0" style={{ opacity: copyOpacity }}>
-          <h1 className="font-display max-w-full text-[clamp(36px,10.8vw,48px)] font-extrabold leading-[1.02] tracking-tight text-navy sm:text-[clamp(50px,6vw,84px)] sm:leading-[0.98]">
+          <h1 className="font-display max-w-full pl-1 text-[clamp(32px,9.4vw,44px)] font-extrabold leading-[1.04] tracking-tight text-navy sm:pl-0 sm:text-[clamp(50px,6vw,84px)] sm:leading-[0.98]">
             <span className="block sm:hidden">
-              <span className="block">Moderne</span>
-              <span className="block">website</span>
+              <span className="block whitespace-nowrap">Moderne website</span>
             </span>
             <span className="hidden sm:block">
               <MaskWords text="Moderne website" inView={false} delay={0.15} />
             </span>
             <span className="relative block text-teal">
               <span className="block sm:hidden">
-                <span className="block">zonder</span>
-                <span className="block">gedoe.</span>
+                <span className="block whitespace-nowrap">zonder gedoe.</span>
               </span>
               <span className="hidden sm:block">
                 <MaskWords text="zonder gedoe." inView={false} delay={0.35} />
@@ -69,7 +68,7 @@ export function Hero() {
                   strokeLinecap="round"
                   initial={reduceMotion ? false : { pathLength: 0 }}
                   animate={{ pathLength: 1 }}
-                  transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
+                  transition={{ duration: timing.duration(0.8, 0.34), delay: timing.delay(1, 0.18), ease: "easeOut" }}
                 />
               </svg>
             </span>
@@ -79,7 +78,7 @@ export function Hero() {
             className="mt-6 max-w-full text-[clamp(18px,5vw,22px)] font-semibold leading-snug text-ink sm:mt-7 sm:max-w-[34ch] sm:text-[clamp(19px,1.7vw,23px)]"
             initial={reduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.55, ease: EASE_OUT_EXPO }}
+            transition={{ duration: timing.duration(0.7, 0.3), delay: timing.delay(0.55, 0.14), ease: EASE_OUT_EXPO }}
           >
             Vaste pakketten. Vaste prijs.{" "}
             <br className="sm:hidden" />
@@ -90,7 +89,7 @@ export function Hero() {
             className="mt-6 grid gap-3 text-[15px] text-ink sm:mt-7 sm:gap-3.5 sm:text-[16px]"
             initial={reduceMotion ? false : "hidden"}
             animate="show"
-            transition={{ staggerChildren: 0.09, delayChildren: 0.65 }}
+            transition={{ staggerChildren: timing.stagger(0.09, 0.04), delayChildren: timing.delay(0.65, 0.16) }}
           >
             {heroPoints.map((point) => (
               <motion.li
@@ -98,7 +97,7 @@ export function Hero() {
                 className="flex items-center gap-3"
                 variants={{
                   hidden: { opacity: 0, x: -18 },
-                  show: { opacity: 1, x: 0, transition: { duration: 0.6, ease: EASE_OUT_EXPO } },
+                  show: { opacity: 1, x: 0, transition: { duration: timing.duration(0.6, 0.26), ease: EASE_OUT_EXPO } },
                 }}
               >
                 <CheckCircle2 className="h-5 w-5 shrink-0 text-teal" strokeWidth={2.4} />
@@ -111,7 +110,7 @@ export function Hero() {
             className="mt-8 flex flex-col items-start gap-4 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6"
             initial={reduceMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.95, ease: EASE_OUT_EXPO }}
+            transition={{ duration: timing.duration(0.7, 0.3), delay: timing.delay(0.95, 0.2), ease: EASE_OUT_EXPO }}
           >
             <WhatsAppButton
               size="lg"
@@ -120,7 +119,7 @@ export function Hero() {
               <span className="sm:hidden">Stuur WhatsApp</span>
               <span className="hidden sm:inline">Stuur een WhatsApp</span>
             </WhatsAppButton>
-            <span className="hand-note inline-flex -rotate-2 items-center gap-3 text-[15px] font-semibold leading-tight text-ink/80">
+            <span className="hand-note -rotate-2 items-center gap-3 text-[15px] font-semibold leading-tight text-ink/80">
               <Undo2
                 className="h-8 w-8 -rotate-[24deg] text-ink/60"
                 strokeWidth={1.8}
@@ -149,6 +148,7 @@ interface HeroArtProps {
 /** Hand-built browser + WhatsApp mockup: the offer and the conversion path in one image. */
 function HeroArt({ artY, chatY }: HeroArtProps) {
   const reduceMotion = useReducedMotion();
+  const timing = useMotionTiming();
 
   return (
     <div
@@ -157,9 +157,9 @@ function HeroArt({ artY, chatY }: HeroArtProps) {
     >
       <motion.div
         style={{ y: artY }}
-        initial={reduceMotion ? false : { opacity: 0, y: 40, rotate: -1 }}
+        initial={reduceMotion ? false : { opacity: 0, y: timing.y(40, 22), rotate: -1 }}
         animate={{ opacity: 1, y: 0, rotate: 0 }}
-        transition={{ duration: 1, delay: 0.4, ease: EASE_OUT_EXPO }}
+        transition={{ duration: timing.duration(1, 0.42), delay: timing.delay(0.4, 0.1), ease: EASE_OUT_EXPO }}
         className="relative"
       >
         {/* Browser window */}
@@ -214,7 +214,11 @@ function HeroArt({ artY, chatY }: HeroArtProps) {
           className="font-display absolute -left-3 -top-5 z-10 inline-block rounded-full bg-navy px-5 py-2.5 text-[14px] font-bold text-white shadow-lg sm:-left-7"
           initial={reduceMotion ? false : { opacity: 0, scale: 0.6, rotate: -12 }}
           animate={{ opacity: 1, scale: 1, rotate: -5 }}
-          transition={{ type: "spring", stiffness: 260, damping: 16, delay: 1.05 }}
+          transition={
+            timing.isMobile
+              ? { type: "spring", stiffness: 380, damping: 20, delay: 0.22 }
+              : { type: "spring", stiffness: 260, damping: 16, delay: 1.05 }
+          }
         >
           1–2 weken live
         </motion.span>
@@ -223,14 +227,14 @@ function HeroArt({ artY, chatY }: HeroArtProps) {
       {/* WhatsApp conversation card */}
       <motion.div
         style={{ y: chatY }}
-        initial={reduceMotion ? false : { opacity: 0, y: 48, scale: 0.95 }}
+        initial={reduceMotion ? false : { opacity: 0, y: timing.y(48, 24), scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.9, delay: 0.85, ease: EASE_OUT_EXPO }}
+        transition={{ duration: timing.duration(0.9, 0.38), delay: timing.delay(0.85, 0.18), ease: EASE_OUT_EXPO }}
         className="absolute -bottom-10 right-2 z-10 w-[min(270px,calc(100%-24px))] sm:-right-6 sm:w-[270px]"
       >
         <motion.div
           animate={reduceMotion ? undefined : { y: [0, -9, 0] }}
-          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: timing.duration(5.5, 3.2), repeat: Infinity, ease: "easeInOut" }}
           className="rounded-2xl border border-line bg-white p-4 shadow-[0_24px_48px_-16px_rgba(7,23,47,0.3)]"
         >
           <div className="flex items-center gap-3 border-b border-line pb-3">

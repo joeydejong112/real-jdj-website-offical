@@ -10,7 +10,7 @@ import {
 } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { navItems } from "../lib/content";
-import { EASE_OUT_EXPO, WhatsAppButton } from "./motion-primitives";
+import { EASE_OUT_EXPO, WhatsAppButton, useMotionTiming } from "./motion-primitives";
 
 const HIDE_AFTER_PX = 160;
 
@@ -18,6 +18,7 @@ export function Header() {
   const [isHidden, setIsHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollY, scrollYProgress } = useScroll();
+  const timing = useMotionTiming();
   const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 22, restDelta: 0.001 });
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -33,7 +34,7 @@ export function Header() {
     <motion.header
       className="fixed inset-x-0 top-0 z-50 border-b border-line/70 bg-paper/90 backdrop-blur-md"
       animate={{ y: isHidden ? "-100%" : "0%" }}
-      transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
+      transition={{ duration: timing.duration(0.35, 0.18), ease: EASE_OUT_EXPO }}
     >
       <motion.div
         className="absolute inset-x-0 top-0 h-[3px] origin-left bg-teal"
@@ -42,7 +43,7 @@ export function Header() {
       />
 
       <div className="shell flex h-[76px] items-center justify-between gap-6">
-        <a href="#top" className="flex min-h-11 flex-col justify-center leading-none" onClick={closeMenu}>
+        <a href="/#top" className="flex min-h-11 flex-col justify-center leading-none" onClick={closeMenu}>
           <span className="font-display block text-[28px] font-extrabold leading-none tracking-tight text-navy">
             JDJ<span className="text-teal">.</span>
           </span>
@@ -87,7 +88,7 @@ export function Header() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
+            transition={{ duration: timing.duration(0.4, 0.2), ease: EASE_OUT_EXPO }}
           >
             <div className="shell flex flex-col gap-1 py-5">
               {navItems.map((item, index) => (
@@ -98,7 +99,11 @@ export function Header() {
                   className="rounded-xl px-4 py-3 text-lg font-semibold text-navy hover:bg-mist"
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 + index * 0.05, duration: 0.35, ease: EASE_OUT_EXPO }}
+                  transition={{
+                    delay: timing.delay(0.05 + index * 0.05, 0.02 + index * 0.025),
+                    duration: timing.duration(0.35, 0.18),
+                    ease: EASE_OUT_EXPO,
+                  }}
                 >
                   {item.label}
                 </motion.a>

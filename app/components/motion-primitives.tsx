@@ -14,6 +14,27 @@ import { WHATSAPP_DEFAULT } from "../lib/content";
 
 export const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
+export function useMotionTiming() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 639px)");
+    const update = () => setIsMobile(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
+
+  return {
+    isMobile,
+    duration: (desktop: number, mobile = Math.max(0.18, desktop * 0.55)) =>
+      isMobile ? mobile : desktop,
+    delay: (desktop: number, mobile = desktop * 0.42) => (isMobile ? mobile : desktop),
+    stagger: (desktop: number, mobile = desktop * 0.55) => (isMobile ? mobile : desktop),
+    y: (desktop: number, mobile = Math.round(desktop * 0.6)) => (isMobile ? mobile : desktop),
+  };
+}
+
 interface RevealProps {
   children: ReactNode;
   className?: string;
@@ -25,14 +46,16 @@ interface RevealProps {
 /** Fade-up reveal when the element scrolls into view. */
 export function Reveal({ children, className, delay = 0, y = 32, once = true }: RevealProps) {
   const reduceMotion = useReducedMotion();
+  const timing = useMotionTiming();
+  const revealY = timing.y(y);
 
   return (
     <motion.div
       className={className}
-      initial={reduceMotion ? false : { opacity: 0, y }}
+      initial={reduceMotion ? false : { opacity: 0, y: revealY }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once, margin: "-60px" }}
-      transition={{ duration: 0.8, delay, ease: EASE_OUT_EXPO }}
+      transition={{ duration: timing.duration(0.8, 0.38), delay: timing.delay(delay), ease: EASE_OUT_EXPO }}
     >
       {children}
     </motion.div>
@@ -60,6 +83,7 @@ export function MaskWords({
   inView = true,
 }: MaskWordsProps) {
   const reduceMotion = useReducedMotion();
+  const timing = useMotionTiming();
   const words = text.split(" ");
 
   if (reduceMotion) {
@@ -68,12 +92,12 @@ export function MaskWords({
 
   const containerVariants = {
     hidden: {},
-    show: { transition: { staggerChildren: stagger, delayChildren: delay } },
+    show: { transition: { staggerChildren: timing.stagger(stagger), delayChildren: timing.delay(delay) } },
   };
 
   const wordVariants = {
     hidden: { y: "115%" },
-    show: { y: "0%", transition: { duration: 0.9, ease: EASE_OUT_EXPO } },
+    show: { y: "0%", transition: { duration: timing.duration(0.9, 0.42), ease: EASE_OUT_EXPO } },
   };
 
   return (
@@ -156,6 +180,8 @@ export function Counter({ to, prefix = "", suffix = "", className }: CounterProp
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   const reduceMotion = useReducedMotion();
+  const timing = useMotionTiming();
+  const countDuration = timing.duration(1.6, 0.75);
   const [value, setValue] = useState(0);
 
   useEffect(() => {
@@ -165,12 +191,12 @@ export function Counter({ to, prefix = "", suffix = "", className }: CounterProp
       return;
     }
     const controls = animate(0, to, {
-      duration: 1.6,
+      duration: countDuration,
       ease: EASE_OUT_EXPO,
       onUpdate: (latest) => setValue(Math.round(latest)),
     });
     return () => controls.stop();
-  }, [isInView, reduceMotion, to]);
+  }, [countDuration, isInView, reduceMotion, to]);
 
   return (
     <span ref={ref} className={className}>
@@ -249,6 +275,7 @@ export function WhatsAppButton({
   variant = "solid",
   className = "",
 }: WhatsAppButtonProps) {
+  const timing = useMotionTiming();
   const sizing =
     size === "lg"
       ? "min-h-14 px-8 py-4 text-[17px]"
@@ -264,7 +291,11 @@ export function WhatsAppButton({
       className={`inline-flex items-center justify-center gap-3 rounded-full font-bold transition-colors ${sizing} ${colors} ${className}`}
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
-      transition={{ type: "spring", stiffness: 380, damping: 20 }}
+      transition={
+        timing.isMobile
+          ? { type: "spring", stiffness: 520, damping: 26 }
+          : { type: "spring", stiffness: 380, damping: 20 }
+      }
     >
       <WhatsAppMark className="h-5 w-5 shrink-0" />
       {children}

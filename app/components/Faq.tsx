@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import type { LucideIcon } from "lucide-react";
 import { MessageCircleQuestion, Plus } from "lucide-react";
 import { faqs } from "../lib/content";
-import { EASE_OUT_EXPO, Reveal, SectionHeading, WhatsAppButton } from "./motion-primitives";
+import { EASE_OUT_EXPO, Reveal, SectionHeading, WhatsAppButton, useMotionTiming } from "./motion-primitives";
 
 export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -72,6 +72,8 @@ interface FaqItemProps {
 }
 
 function FaqItem({ icon: Icon, question, answer, isOpen, onToggle }: FaqItemProps) {
+  const timing = useMotionTiming();
+
   return (
     <div
       className={`rounded-2xl bg-white transition-all duration-300 ${
@@ -101,27 +103,24 @@ function FaqItem({ icon: Icon, question, answer, isOpen, onToggle }: FaqItemProp
             isOpen ? "bg-navy text-white" : "bg-mist text-navy"
           }`}
           animate={{ rotate: isOpen ? 45 : 0 }}
-          transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
+          transition={{ duration: timing.duration(0.35, 0.18), ease: EASE_OUT_EXPO }}
           aria-hidden="true"
         >
           <Plus className="h-4 w-4" strokeWidth={2.6} />
         </motion.span>
       </button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.45, ease: EASE_OUT_EXPO }}
-            className="overflow-hidden"
-          >
-            <p className="max-w-[60ch] pb-6 pl-[84px] pr-6 text-[15px] leading-7 text-muted">
-              {answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Always render the answer so the content is in the server HTML for search engines. */}
+      <motion.div
+        initial={false}
+        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: timing.duration(0.45, 0.22), ease: EASE_OUT_EXPO }}
+        className="overflow-hidden"
+        aria-hidden={!isOpen}
+      >
+        <p className="max-w-[60ch] pb-6 pl-[84px] pr-6 text-[15px] leading-7 text-muted">
+          {answer}
+        </p>
+      </motion.div>
     </div>
   );
 }

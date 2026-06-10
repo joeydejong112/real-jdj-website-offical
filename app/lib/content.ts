@@ -13,9 +13,9 @@ import {
   Zap,
 } from "lucide-react";
 
-export const EMAIL = "info@jdjwebdevelopment.nl";
+export const EMAIL = "joeydejong1112work@gmail.com";
 
-const WHATSAPP_NUMBER = "31600000000";
+export const WHATSAPP_NUMBER = "31614374491";
 
 export function whatsappUrl(message: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -30,12 +30,13 @@ export interface NavItem {
   href: string;
 }
 
+// "/#" prefix keeps the anchors working from subpages like /privacy
 export const navItems: NavItem[] = [
-  { label: "Waarom JDJ", href: "#waarom-jdj" },
-  { label: "Werkwijze", href: "#werkwijze" },
-  { label: "Pakketten", href: "#pakketten" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Waarom JDJ", href: "/#waarom-jdj" },
+  { label: "Werkwijze", href: "/#werkwijze" },
+  { label: "Pakketten", href: "/#pakketten" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export const marqueeItems = [
@@ -44,7 +45,6 @@ export const marqueeItems = [
   "Mobiel vriendelijk",
   "SSL & veilig",
   "Vaste prijs",
-  "Utrecht + 30 km",
   "Persoonlijk contact",
 ];
 

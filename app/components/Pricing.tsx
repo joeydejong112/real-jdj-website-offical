@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { Check } from "lucide-react";
 import { packages, whatsappUrl } from "../lib/content";
 import type { Package } from "../lib/content";
-import { Reveal, SectionHeading } from "./motion-primitives";
+import { Reveal, SectionHeading, useMotionTiming } from "./motion-primitives";
 
 export function Pricing() {
   return (
@@ -48,12 +48,17 @@ export function Pricing() {
 
 function PricingCard({ pkg, index }: { pkg: Package; index: number }) {
   const isFeatured = pkg.featured === true;
+  const timing = useMotionTiming();
 
   return (
     <Reveal delay={index * 0.12} y={48} className="h-full">
       <motion.article
         whileHover={{ y: -8 }}
-        transition={{ type: "spring", stiffness: 280, damping: 24 }}
+        transition={
+          timing.isMobile
+            ? { type: "spring", stiffness: 420, damping: 28 }
+            : { type: "spring", stiffness: 280, damping: 24 }
+        }
         className={`relative flex h-full flex-col rounded-3xl p-8 lg:p-9 ${
           isFeatured
             ? "bg-navy text-white shadow-[0_36px_72px_-24px_rgba(7,23,47,0.5)] lg:-mt-5 lg:mb-5"

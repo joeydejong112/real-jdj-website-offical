@@ -3,11 +3,12 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
 import { steps } from "../lib/content";
-import { EASE_OUT_EXPO, Reveal, SectionHeading, WhatsAppButton } from "./motion-primitives";
+import { EASE_OUT_EXPO, Reveal, SectionHeading, WhatsAppButton, useMotionTiming } from "./motion-primitives";
 
 export function Process() {
   const timelineRef = useRef<HTMLOListElement>(null);
   const reduceMotion = useReducedMotion();
+  const timing = useMotionTiming();
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ["start 0.72", "end 0.72"],
@@ -63,7 +64,11 @@ export function Process() {
               initial={reduceMotion ? false : { opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7, delay: index * 0.06, ease: EASE_OUT_EXPO }}
+              transition={{
+                duration: timing.duration(0.7, 0.28),
+                delay: timing.delay(index * 0.06, index * 0.025),
+                ease: EASE_OUT_EXPO,
+              }}
             >
               <span className="relative z-10 grid h-11 w-11 place-items-center rounded-full border border-white/15 bg-navy text-teal shadow-[0_0_0_4px_var(--color-navy-deep)] sm:h-14 sm:w-14 sm:shadow-[0_0_0_6px_var(--color-navy-deep)]">
                 <Icon className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.2} />
