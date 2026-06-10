@@ -69,8 +69,9 @@ export function Contact() {
                   >
                     <Mail className="h-4.5 w-4.5 text-teal" />
                     Liever mailen?{" "}
-                    <span className="break-all underline underline-offset-4 decoration-teal group-hover:decoration-white">
-                      {EMAIL}
+                    <span className="underline underline-offset-4 decoration-teal group-hover:decoration-white">
+                      {EMAIL.split("@")[0]}
+                      <wbr />@{EMAIL.split("@")[1]}
                     </span>
                   </a>
                 </div>

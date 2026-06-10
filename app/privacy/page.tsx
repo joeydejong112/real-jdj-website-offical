@@ -31,8 +31,8 @@ export default function PrivacyPage() {
 
             <h2>1. Wie ben ik?</h2>
             <p>
-              JDJ Webdevelopment bouwt en onderhoudt websites voor lokale
-              bedrijven in Utrecht en omgeving. JDJ Webdevelopment is de
+              JDJ Webdevelopment bouwt en onderhoudt websites voor
+              ondernemers in heel Nederland. JDJ Webdevelopment is de
               verwerkingsverantwoordelijke voor de persoonsgegevens die via
               deze website en bijbehorende communicatie worden verwerkt.
             </p>

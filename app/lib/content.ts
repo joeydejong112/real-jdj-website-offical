@@ -60,7 +60,7 @@ export const stats: Stat[] = [
   { value: 48, suffix: " uur", label: "startklaar na akkoord" },
   { value: null, display: "1–2", suffix: " weken", label: "van content naar live" },
   { value: 100, suffix: "%", label: "vaste prijs vooraf" },
-  { value: 24, prefix: "< ", suffix: " uur", label: "reactie op werkdagen" },
+  { value: 24, suffix: " uur", label: "max. reactietijd op werkdagen" },
 ];
 
 export interface Step {

@@ -253,7 +253,7 @@ interface WhatsAppButtonProps {
   className?: string;
 }
 
-function WhatsAppMark({ className = "" }: { className?: string }) {
+export function WhatsAppMark({ className = "" }: { className?: string }) {
   return (
     <svg
       className={className}

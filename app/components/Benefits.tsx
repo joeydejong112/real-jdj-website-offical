@@ -89,11 +89,11 @@ export function Benefits() {
               Ik bouw de site op een nette technische basis, zodat hosting en onderhoud
               beheersbaar blijven.
             </p>
-            <ul className="mt-6 flex flex-wrap gap-2.5">
+            <ul className="mt-6 grid grid-cols-2 gap-2.5">
               {techChips.map(({ icon: Icon, label }) => (
                 <li
                   key={label}
-                  className="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-3.5 py-2 text-[13px] font-semibold text-ink"
+                  className="flex items-center justify-center gap-2 rounded-full border border-line bg-paper px-3 py-2 text-[13px] font-semibold text-ink"
                 >
                   <Icon className="h-4 w-4 text-teal-deep" strokeWidth={2.3} />
                   {label}
@@ -128,26 +128,34 @@ export function Benefits() {
         </div>
 
         <Reveal delay={0.15} className="mt-16">
-          <dl className="grid grid-cols-2 overflow-hidden rounded-2xl border border-line bg-white lg:grid-cols-4 lg:divide-x lg:divide-line lg:px-8 lg:py-10">
+          <dl className="grid grid-cols-2 overflow-hidden rounded-3xl border border-line bg-white shadow-[0_2px_6px_rgba(7,23,47,0.04)] lg:grid-cols-4 lg:px-8 lg:py-11">
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className={`min-w-0 px-3 py-5 text-center sm:px-5 sm:py-7 lg:px-6 lg:py-0 ${
+                className={`min-w-0 px-3 py-7 text-center sm:px-5 sm:py-9 lg:px-6 lg:py-0 ${
                   index % 2 === 0 ? "border-r border-line/70 lg:border-r-0" : ""
-                } ${index < 2 ? "border-b border-line/70 lg:border-b-0" : ""}`}
+                } ${index < 2 ? "border-b border-line/70 lg:border-b-0" : ""} ${
+                  index > 0 ? "lg:border-l lg:border-line/70" : ""
+                }`}
               >
                 <dt className="sr-only">{stat.label}</dt>
-                <dd className="font-display whitespace-nowrap text-[clamp(27px,7vw,34px)] font-extrabold leading-none tracking-tight text-navy sm:text-[clamp(36px,3.4vw,48px)]">
-                  {stat.value === null ? (
-                    <span>
-                      {stat.display}
-                      {stat.suffix}
-                    </span>
-                  ) : (
-                    <Counter to={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
-                  )}
+                <dd>
+                  <span
+                    className="mx-auto mb-4 block h-1 w-8 rounded-full bg-teal"
+                    aria-hidden="true"
+                  />
+                  <span className="font-display block whitespace-nowrap text-[clamp(27px,7vw,34px)] font-extrabold leading-none tracking-tight text-navy sm:text-[clamp(36px,3.4vw,48px)]">
+                    {stat.value === null ? (
+                      <span>
+                        {stat.display}
+                        {stat.suffix}
+                      </span>
+                    ) : (
+                      <Counter to={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+                    )}
+                  </span>
                 </dd>
-                <dd className="mx-auto mt-2 max-w-[15ch] text-[12px] font-semibold leading-snug text-muted sm:text-[14px] lg:mt-2.5 lg:max-w-none lg:leading-normal">
+                <dd className="mx-auto mt-2.5 max-w-[16ch] text-[12px] font-semibold leading-snug text-muted sm:text-[14px] lg:mt-3 lg:max-w-none lg:whitespace-nowrap">
                   {stat.label}
                 </dd>
               </div>
