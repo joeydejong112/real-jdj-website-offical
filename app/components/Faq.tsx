@@ -22,7 +22,7 @@ export function Faq() {
           <SectionHeading index="04" eyebrow="FAQ" title="Veelgestelde vragen" />
           <Reveal delay={0.25}>
             <p className="mt-6 max-w-[40ch] text-[17px] leading-8 text-muted">
-              Alles wat je wilt weten voordat je begint — over snelheid, kosten,
+              Alles wat je wilt weten voordat je begint: snelheid, kosten,
               looptijd en wat je zelf aanlevert.
             </p>
           </Reveal>
@@ -38,8 +38,7 @@ export function Faq() {
               </span>
               <p className="font-display mt-5 text-[20px] font-bold">Staat je vraag er niet bij?</p>
               <p className="mt-2 text-[14.5px] leading-6 text-white/65">
-                Geen contactformulieren of wachtrijen — gewoon even appen. Je krijgt binnen
-                24 uur persoonlijk antwoord.
+                App je vraag via WhatsApp. Je krijgt binnen 24 uur antwoord van mij.
               </p>
               <WhatsAppButton className="mt-5">Stel je vraag</WhatsAppButton>
             </div>

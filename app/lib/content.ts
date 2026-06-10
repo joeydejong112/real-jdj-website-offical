@@ -73,7 +73,7 @@ export const steps: Step[] = [
   {
     icon: Users,
     title: "Intake & doelen",
-    text: "We bespreken je wensen, doelen en planning. Binnen 48 uur weet je precies waar je aan toe bent.",
+    text: "We bespreken je wensen, doelen en planning. Binnen 48 uur krijg je prijs, scope en startdatum.",
   },
   {
     icon: ImageIcon,
@@ -83,17 +83,17 @@ export const steps: Step[] = [
   {
     icon: PenLine,
     title: "Ontwerp",
-    text: "Je krijgt een duidelijke, conversiegerichte opzet die past bij jouw bedrijf — geen template-gevoel.",
+    text: "Je krijgt een opzet met diensten, bewijs, WhatsApp-knoppen en een offerteblok boven de vouw.",
   },
   {
     icon: Code2,
     title: "Bouw & revisies",
-    text: "Je site wordt snel, responsive en veilig gebouwd. Jouw feedback wordt direct verwerkt.",
+    text: "Ik bouw je site responsive, met SSL en korte laadtijden. Je feedback verwerk ik per revisieronde.",
   },
   {
     icon: Rocket,
     title: "Live & support",
-    text: "Na een laatste controle gaat je site online. Daarna blijf ik gewoon bereikbaar via WhatsApp.",
+    text: "Na controle op mobiel, formulieren en links gaat je site live. Daarna blijf ik bereikbaar via WhatsApp.",
   },
 ];
 
@@ -110,25 +110,35 @@ export interface Package {
 export const packages: Package[] = [
   {
     name: "Start",
-    subtitle: "Snel en zichtbaar online",
+    subtitle: "Binnen 1-2 weken online",
     features: ["1–3 pagina's", "Basis-SEO & snelle laadtijd", "Mobielvriendelijk ontwerp", "1 revisieronde"],
     setup: "€299",
     monthly: "€29",
   },
   {
-    name: "Groei",
-    subtitle: "Meer structuur, meer klanten",
+    name: "Plus",
+    subtitle: "Meer pagina's en lokale SEO",
     basedOn: "Alles uit Start, plus:",
-    features: ["5–7 pagina's", "Conversiegerichte opbouw", "Sterkere SEO-basis", "2 revisierondes"],
+    features: [
+      "5–7 pagina's",
+      "Offerteblok en WhatsApp-CTA's",
+      "Paginatitels, meta descriptions en lokale zoektermen",
+      "2 revisierondes",
+    ],
     setup: "€699",
     monthly: "€49",
     featured: true,
   },
   {
     name: "Pro",
-    subtitle: "CMS & maatwerk",
-    basedOn: "Alles uit Groei, plus:",
-    features: ["8–12+ pagina's", "CMS: zelf secties aanpassen", "Maatwerk onderdelen", "3 revisierondes"],
+    subtitle: "CMS en extra secties",
+    basedOn: "Bovenop Plus:",
+    features: [
+      "8–12+ pagina's",
+      "CMS: zelf secties aanpassen",
+      "Projecten, prijslijsten of teamleden",
+      "3 revisierondes",
+    ],
     setup: "€1.299",
     monthly: "€79",
   },
@@ -145,25 +155,25 @@ export const faqs: Faq[] = [
     icon: Zap,
     question: "Hoe snel staat mijn website online?",
     answer:
-      "Na akkoord starten we binnen 48 uur. Zodra je content compleet is, sta je binnen 1–2 weken live.",
+      "Na akkoord plannen we de start binnen 48 uur. Met teksten en foto's binnen staat je site in 1-2 weken live.",
   },
   {
     icon: TrendingUp,
-    question: "Kan ik later upgraden van Start naar Groei of Pro?",
+    question: "Kan ik later upgraden van Start naar Plus of Pro?",
     answer:
-      "Ja, upgraden kan altijd. De nieuwe scope verrekenen we helder vooraf, zonder verrassingen.",
+      "Ja. Voor de upgrade krijg je eerst een nieuwe scope met prijs, pagina's en planning.",
   },
   {
     icon: ClipboardList,
     question: "Wat moet ik zelf aanleveren?",
     answer:
-      "Teksten, foto's en praktische info zoals openingstijden. Ik help je met een simpele checklist op weg.",
+      "Teksten, foto's en praktische info zoals openingstijden. Ik stuur je een korte checklist.",
   },
   {
     icon: Repeat2,
     question: "Wat valt onder fair-use wijzigingen?",
     answer:
-      "Kleine contentwijzigingen binnen bestaande pagina's — tekst, beeld of links vervangen. Grotere uitbreidingen bespreken we vooraf.",
+      "Kleine contentwijzigingen binnen bestaande pagina's: tekst, beeld of links vervangen. Grotere uitbreidingen bespreken we vooraf.",
   },
   {
     icon: Globe,
@@ -175,6 +185,6 @@ export const faqs: Faq[] = [
     icon: CalendarClock,
     question: "Wat is de minimale looptijd?",
     answer:
-      "Minimaal 6 maanden, daarna maandelijks opzegbaar. Je weet vooraf precies waar je aan toe bent.",
+      "Minimaal 6 maanden, daarna maandelijks opzegbaar. De maandprijs en fair-use afspraken staan in je voorstel.",
   },
 ];

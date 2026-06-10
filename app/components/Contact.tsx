@@ -8,7 +8,7 @@ import { Magnetic, MaskWords, Reveal, WhatsAppButton } from "./motion-primitives
 
 const promises = [
   { icon: Clock, text: "Reactie binnen 24 uur op werkdagen" },
-  { icon: ShieldCheck, text: "Vrijblijvend advies — je zit nergens aan vast" },
+  { icon: ShieldCheck, text: "Vrijblijvend advies, zonder verplichting" },
 ];
 
 export function Contact() {
@@ -43,13 +43,13 @@ export function Contact() {
                   online te gaan?
                 </span>
                 <span className="hidden sm:block">
-                  <MaskWords text="Klaar om snel online te gaan?" />
+                  <MaskWords text="Klaar voor een website binnen 1-2 weken?" />
                 </span>
               </h2>
               <Reveal delay={0.2}>
                 <p className="mt-5 max-w-full text-[16px] leading-7 text-white/70 sm:mt-6 sm:max-w-[48ch] sm:text-[17px] sm:leading-8">
-                  Stuur een bericht en ontvang snel persoonlijk advies over welk pakket
-                  het beste bij jouw bedrijf past. Je appt direct met de bouwer zelf.
+                  Stuur een bericht. Binnen 24 uur krijg je pakketadvies op basis van je
+                  pagina's, content en planning.
                 </p>
               </Reveal>
               <Reveal delay={0.35}>

@@ -35,12 +35,12 @@ export function Process() {
           />
           <Reveal delay={0.25}>
             <p className="mt-6 max-w-[44ch] text-[17px] leading-8 text-white/65">
-              Vijf duidelijke stappen, zonder verrassingen. Jij weet altijd waar we staan
-              en wat de volgende stap is — gewoon via WhatsApp.
+              Vijf stappen: intake, content, ontwerp, bouw en livegang. Ik stuur de
+              volgende stap via WhatsApp.
             </p>
           </Reveal>
           <Reveal delay={0.4} className="mt-9">
-            <WhatsAppButton variant="inverted">Start stap 1 — app me</WhatsAppButton>
+            <WhatsAppButton variant="inverted">Start stap 1: app me</WhatsAppButton>
           </Reveal>
         </div>
 

@@ -55,7 +55,7 @@ export function Benefits() {
             <h3 className="font-display mt-6 text-[24px] font-bold text-navy">Snel online</h3>
             <p className="mt-3 max-w-[52ch] text-[15px] leading-7 text-muted">
               Geen maandenlange trajecten. Vandaag akkoord betekent deze week nog de eerste
-              stap — en binnen twee weken sta je live.
+              stap. Binnen twee weken sta je live.
             </p>
             <DeliveryTimeline />
           </BentoCard>
@@ -66,8 +66,8 @@ export function Benefits() {
               Persoonlijk contact
             </h3>
             <p className="mt-3 text-[15px] leading-7 text-white/65">
-              Je appt direct met de bouwer zelf. Korte lijnen, snelle antwoorden, geen
-              accountmanagers ertussen.
+              Je appt met mij via WhatsApp. Ik antwoord binnen 24 uur en pak je vraag
+              zelf op.
             </p>
             <ChatPreview />
           </BentoCard>
@@ -78,7 +78,8 @@ export function Benefits() {
               Technisch netjes
             </h3>
             <p className="mt-3 text-[15px] leading-7 text-muted">
-              Gebouwd om jaren mee te gaan, zonder dat jij ernaar hoeft om te kijken.
+              Ik bouw de site op een nette technische basis, zodat hosting en onderhoud
+              beheersbaar blijven.
             </p>
             <ul className="mt-6 flex flex-wrap gap-2.5">
               {techChips.map(({ icon: Icon, label }) => (
@@ -98,11 +99,11 @@ export function Benefits() {
             <div className="grid items-center gap-7 sm:grid-cols-[1fr_1.1fr]">
               <div>
                 <h3 className="font-display mt-6 text-[24px] font-bold text-navy sm:mt-0">
-                  SEO basis op orde
+                  Titels en lokale zoektermen
                 </h3>
                 <p className="mt-3 text-[15px] leading-7 text-teal-deep/90">
-                  Heldere structuur, sterke paginatitels en technische basis-SEO,
-                  zodat Google je website goed kan begrijpen.
+                  Ik zet de pagina's op met logische headings, paginatitels en lokale
+                  zoektermen.
                 </p>
               </div>
               <SearchResultPreview />
@@ -262,7 +263,7 @@ function SearchResultPreview() {
           <span className="text-[12px] font-medium text-teal-deep">www.jouwbedrijf.nl</span>
         </div>
         <p className="mt-1.5 text-[14.5px] font-bold leading-snug text-navy">
-          Jouw Bedrijf — duidelijk online in Utrecht
+          Jouw Bedrijf: duidelijk online in Utrecht
         </p>
         <span className="mt-2 block h-2 w-[90%] rounded-full bg-line" />
         <span className="mt-1.5 block h-2 w-[65%] rounded-full bg-line" />
