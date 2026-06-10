@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s http://127.0.0.1:3000/ -o /tmp/page.html -m 20)",
+      "Bash(echo \"exit: $?\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code} %{size_download}\\\\n\" \"http://127.0.0.1:3000/_next/static/css/app/layout.css?v=1781103282662\" -m 15)"
+    ]
+  }
+}
