@@ -25,7 +25,7 @@ export function Pricing() {
           </p>
         </Reveal>
 
-        <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-3 lg:gap-7">
+        <div className="mt-8 grid items-stretch gap-6 lg:mt-14 lg:grid-cols-3 lg:gap-7">
           {packages.map((pkg, index) => (
             <PricingCard key={pkg.name} pkg={pkg} index={index} />
           ))}

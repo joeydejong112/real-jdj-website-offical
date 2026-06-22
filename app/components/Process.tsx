@@ -26,7 +26,7 @@ export function Process() {
         aria-hidden="true"
       />
 
-      <div className="shell relative grid gap-16 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="shell relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         <div className="lg:sticky lg:top-32 lg:self-start">
           <SectionHeading
             index="02"

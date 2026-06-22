@@ -145,6 +145,9 @@ export function SectionHeading({
   dark = false,
   className = "",
 }: SectionHeadingProps) {
+  const timing = useMotionTiming();
+  const reduceMotion = useReducedMotion();
+
   return (
     <div className={`${align === "center" ? "text-center" : ""} ${className}`}>
       <Reveal y={16}>
@@ -158,11 +161,11 @@ export function SectionHeading({
         </p>
       </Reveal>
       <h2
-        className={`font-display mt-4 text-[clamp(34px,4.2vw,56px)] font-bold leading-[1.04] tracking-tight ${
+        className={`font-display mt-3 text-[clamp(28px,7.2vw,40px)] font-bold leading-[1.08] tracking-tight lg:mt-4 lg:text-[clamp(34px,4.2vw,56px)] lg:leading-[1.04] ${
           dark ? "text-white" : "text-navy"
         }`}
       >
-        <MaskWords text={title} delay={0.1} />
+        {timing.isMobile || reduceMotion ? title : <MaskWords text={title} delay={0.1} />}
       </h2>
     </div>
   );

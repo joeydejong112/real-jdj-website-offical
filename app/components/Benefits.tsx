@@ -35,7 +35,7 @@ export function Benefits() {
   return (
     <section id="waarom-jdj" className="relative py-20 lg:py-28">
       <div className="shell">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
+        <div className="grid gap-5 lg:grid-cols-[1.1fr_1fr] lg:items-end lg:gap-10">
           <SectionHeading
             index="01"
             eyebrow="Waarom JDJ"

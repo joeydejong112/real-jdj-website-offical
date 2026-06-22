@@ -17,7 +17,7 @@ export function Faq() {
         aria-hidden="true"
       />
 
-      <div className="shell relative grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+      <div className="shell relative grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
         <div className="lg:sticky lg:top-32 lg:self-start">
           <SectionHeading index="04" eyebrow="FAQ" title="Veelgestelde vragen" />
           <Reveal delay={0.25}>
@@ -28,7 +28,7 @@ export function Faq() {
           </Reveal>
 
           <Reveal delay={0.4}>
-            <div className="relative mt-9 max-w-[360px] overflow-hidden rounded-3xl bg-navy p-7 text-white">
+            <div className="relative mt-6 max-w-[360px] overflow-hidden rounded-3xl bg-navy p-7 text-white lg:mt-9">
               <span
                 className="absolute -right-10 -top-10 h-36 w-36 rounded-full bg-teal/20 blur-2xl"
                 aria-hidden="true"
